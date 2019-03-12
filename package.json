@@ -1,0 +1,24 @@
+{
+  "name": "friend-finder",
+  "version": "1.0.0",
+  "description": "For this project, we had to build a compatibility-based \"FriendFinder\" application/ a basic dating app. This full-stack site takes in results from user surveys, then compares answers with those from other users for compatibility. The app then displays the name and picture of the user with the best overall match.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/violettebec21/friend-finder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/violettebec21/friend-finder/issues"
+  },
+  "homepage": "https://github.com/violettebec21/friend-finder#readme"
+}
