@@ -14,7 +14,7 @@
 // These data sources hold arrays of information on friend-data, c etc.
 // ===============================================================================
 
-var friendData = require("../data/friends.js");
+var friendData = require("../app/data/friends.js");
 
 // ===============================================================================
 // ROUTING
@@ -46,7 +46,7 @@ module.exports = function (app) {
     //    * A POST routes `/api/friends`. 
     //    This will be used to handle incoming survey results. 
 
-    app.post("/app/friends", function (req, res) {
+    app.post("/api/friends", function (req, res) {
 
         //      This route will also be used to handle the compatibility logic.
 
@@ -65,38 +65,30 @@ module.exports = function (app) {
         // Our "server" will respond to requests and let users know who they are compatible with
 
         // create an object to hold "bestFriend"
-        var bestFriend = {
-            name: "",
-            photo: "",
-            scoreDifference: 0,
-        };
+        var bestFriend = {};
 
         // parse the result of the user submit POST
         var userData = req.body;
-        var userName = userData.name;
-        var userPhoto = userData.photo;
-        var userScore = userData.score;
-
-        // create a variable to hold the score difference between users
-        var scoreDifference = 0;
+        var userScores = userData.scores;
 
         // Loop through the friend array in friends.js
         for (var i = 0; i < friendData.length; i++) {
             console.log(friendData[i].name);
-            scoreDifference = 0;
+            // create a variable to hold the score difference between users
+            var scoreDifference = 0;
 
             // Loop through scores for each friend & calcualte difference in scores
-            for (var j = 0; j < friendData[i].scores[j]; j++) {
+            for (var j = 0; j < friendData[i].scores.length; j++) {
                 scoreDifference += Math.abs(parseInt(userScores[j]) - parseInt(friendData[i].scores[j]));
-
-                // If the sum of differences is less then the differences of the current "best match"
+                console.log(scoreDifference);
+            }
+            // If the sum of differences is less then the differences of the current "best match"
                 // set the bestFriend match for the user 
-                if (scoreDifference <= bestFriend.friendDifference) {
+                if (!bestFriend.scoreDifference || scoreDifference <= bestFriend.scoreDifference) {
                     bestFriend.name = friendData[i].name;
                     bestFriend.photo = friendData[i].photo;
-                    bestFriend.friendDifference = scoreDifference;
+                    bestFriend.scoreDifference = scoreDifference;
                 }
-            }
         }
 
         // push the userData use for HTML

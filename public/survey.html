@@ -161,6 +161,7 @@ Each answer should be on a scale of 1 to 5 based on how much the user agrees or 
                 aria-hidden="true"></i>
             Submit</button>
 
+
         <hr>
         <footer class="footer">
             <div class="container">
@@ -168,6 +169,25 @@ Each answer should be on a scale of 1 to 5 based on how much the user agrees or 
                         Repo</a>
             </div>
         </footer>
+
+<!------------------------------- MODAL------------------------------------------------------>
+
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Your BEST FRIEND is: <span class="match-name"></span></p>
+                  <p>Your score difference is: <span class="match-difference"></span></p>
+                  <img class ="match-img"/>
+                </div>
+              </div>
+            </div>
+          </div>
 
     </div>
 
@@ -213,17 +233,18 @@ Each answer should be on a scale of 1 to 5 based on how much the user agrees or 
                         $("#q10").val()
                     ]
                 };
-
+                
                 // AJAX POST METHOD
                 // sends data to the friends API.
                 $.post("/api/friends", userData, function (data) {
 
                     // Grabs result from the AJAX post to show BEST MATCH name and photo
-                    $("#match-name").text(data.name);
-                    $("#match-img").attr("src", data.photo);
+                    $(".match-name").text(data.name);
+                    $(".match-difference").text(data.scoreDifference);
+                    $(".match-img").attr("src", data.photo);
 
                     // MODAL to indicate the best match 
-                    $("#results-modal").modal("toggle");
+                    $(".modal").modal("show");
 
                 });
             } else {
